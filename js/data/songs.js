@@ -1,14 +1,14 @@
 export const songsList = [{
     "id": "1",
     "url": "../../music/nice-for-what.mp3",
-    "time": "04:22",
+    "time": "03:30",
     "title": "Nice For What",
     "artist": "Drake"
   },
   {
     "id": "2",
     "url": "../../music/gods-plan.mp3",
-    "time": "03:19",
+    "time": "03:18",
     "title": "God's Plan",
     "artist": "Drake"
   },

@@ -7,3 +7,6 @@
 *.iml
 out
 gen
+
+# Music mp3 files
+music/*
