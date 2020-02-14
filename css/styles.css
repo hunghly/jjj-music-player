@@ -112,7 +112,7 @@ body {
     color: inherit;
 }
 .play-pause {
-    color: var(--main- font-color);
+    color: var(--main-font-color);
     margin-right: 20px;
 }
 .playlist__song-name {

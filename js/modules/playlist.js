@@ -7,15 +7,51 @@ const PlayList = (_ => {
     let currentSong = new Audio(songs[currentlyPlayingIndex].url);
     let isPlaying = false;
 
+
+
     //cache the DOM
     const playListEl = document.querySelector(".playlist");
 
     const init = () => {
-        console.log("hello");
         // console.log(songsList);
         // console.log(currentSong);
         render();
+        listeners();
     };
+
+    const changeAudioSrc = _ => {
+        currentSong.src = songs[currentlyPlayingIndex].url;
+    };
+
+    const togglePlayPause = _ => {
+        return currentSong.paused ? currentSong.play() : currentSong.pause();
+    };
+
+    const mainPlay = clickedIndex => {
+        if (currentlyPlayingIndex === clickedIndex) {
+            togglePlayPause();
+        } else {
+            currentlyPlayingIndex = clickedIndex;
+            changeAudioSrc();
+            currentSong.currentTime = 250;
+            togglePlayPause();
+        }
+    };
+
+    const listeners = () => {
+        playListEl.addEventListener("click", function (e) {
+            if (e.target && e.target.matches(".fa")) {
+                const listElem = e.target.parentNode.parentNode;
+                const listElemIndex = [...listElem.parentElement.children].indexOf(listElem);
+                mainPlay(listElemIndex);
+                render();
+            }
+        });
+        currentSong.addEventListener("ended", _ => {
+            console.log("hey it ended");
+        })
+    };
+
 
     const render = () => {
         let markup = "";
