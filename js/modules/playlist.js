@@ -1,4 +1,5 @@
 import {songsList} from "../data/songs.js";
+import PlayInfo from "./play-info.js";
 
 const PlayList = (_ => {
     // data or state
@@ -6,7 +7,6 @@ const PlayList = (_ => {
     let currentlyPlayingIndex = 0;
     let currentSong = new Audio(songs[currentlyPlayingIndex].url);
     let isPlaying = false;
-
 
 
     //cache the DOM
@@ -17,6 +17,10 @@ const PlayList = (_ => {
         // console.log(currentSong);
         render();
         listeners();
+        PlayInfo.setState({
+            songsLength: songs.length,
+            isPlaying: !currentSong.paused
+        })
     };
 
     const changeAudioSrc = _ => {
@@ -33,8 +37,21 @@ const PlayList = (_ => {
         } else {
             currentlyPlayingIndex = clickedIndex;
             changeAudioSrc();
-            currentSong.currentTime = 250;
             togglePlayPause();
+        }
+
+        PlayInfo.setState({
+            songsLength: songs.length,
+            isPlaying: !currentSong.paused
+        })
+    };
+
+    const playNext = _ => {
+        if (songs[currentlyPlayingIndex + 1]) {
+            currentlyPlayingIndex++;
+            currentSong.src = songs[currentlyPlayingIndex].url;
+            togglePlayPause();
+            render();
         }
     };
 
@@ -48,14 +65,13 @@ const PlayList = (_ => {
             }
         });
         currentSong.addEventListener("ended", _ => {
-            console.log("hey it ended");
+            playNext();
         })
     };
 
 
     const render = () => {
         let markup = "";
-
         const toggleIcon = (itemIndex) => {
             if (currentlyPlayingIndex === itemIndex) {
                 return currentSong.paused ? 'fa-play' : 'fa-pause';
