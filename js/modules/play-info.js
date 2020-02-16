@@ -12,13 +12,12 @@ const PlayInfo = (() => {
     const playerTriggerEl = document.querySelector(".player__trigger");
 
     const init = _ => {
-        console.log("this is play info");
         render();
         listeners();
     };
 
     const listeners = _ => {
-        playerTriggerEl.addEventListener("click", ()=> {
+        playerTriggerEl.addEventListener("click", () => {
             console.log("clicked");
             state.isPlaying = !state.isPlaying;
             render();
@@ -42,6 +41,7 @@ const PlayInfo = (() => {
         setState
     }
 })();
+
 export default PlayInfo;
 
 

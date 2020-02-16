@@ -8,7 +8,6 @@ const PlayList = (_ => {
     let currentlyPlayingIndex = 0;
     let currentSong = new Audio(songs[currentlyPlayingIndex].url);
 
-
     //cache the DOM
     const playListEl = document.querySelector(".playlist");
 
@@ -17,9 +16,7 @@ const PlayList = (_ => {
         render();
     };
 
-    const init = () => {
-        // console.log(songsList);
-        // console.log(currentSong);
+    const init = _ => {
         render();
         listeners();
         PlayInfo.setState({
@@ -60,7 +57,7 @@ const PlayList = (_ => {
         }
     };
 
-    const listeners = () => {
+    const listeners = _ => {
         playListEl.addEventListener("click", function (e) {
             if (e.target && e.target.matches(".fa")) {
                 const listElem = e.target.parentNode.parentNode;
