@@ -1,3 +1,5 @@
+import PlayList from "./playlist.js";
+
 const PlayInfo = (() => {
 
     const state = {
@@ -12,6 +14,16 @@ const PlayInfo = (() => {
     const init = _ => {
         console.log("this is play info");
         render();
+        listeners();
+    };
+
+    const listeners = _ => {
+        playerTriggerEl.addEventListener("click", ()=> {
+            console.log("clicked");
+            state.isPlaying = !state.isPlaying;
+            render();
+            PlayList.flip();
+        });
     };
 
     const setState = obj => {
